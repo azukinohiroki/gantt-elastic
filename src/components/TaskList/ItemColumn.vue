@@ -7,7 +7,8 @@
  */
 -->
 <template>
-  <div class="gantt-elastic__task-list-item-column" :style="itemColumnStyle">
+  <div class="gantt-elastic__task-list-item-column" :style="itemColumnStyle"
+    @click="emitEvent('click', $event)">
     <div class="gantt-elastic__task-list-item-value-wrapper" :style="wrapperStyle">
       <slot></slot>
       <div class="gantt-elastic__task-list-item-value-container" :style="containerStyle">
@@ -15,7 +16,6 @@
           v-if="!html"
           class="gantt-elastic__task-list-item-value"
           :style="valueStyle"
-          @click="emitEvent('click', $event)"
           @mouseenter="emitEvent('mouseenter', $event)"
           @mouseover="emitEvent('mouseover', $event)"
           @mouseout="emitEvent('mouseout', $event)"
@@ -33,7 +33,6 @@
           v-else
           class="gantt-elastic__task-list-item-value"
           :style="valueStyle"
-          @click="emitEvent('click', $event)"
           @mouseenter="emitEvent('mouseenter', $event)"
           @mouseover="emitEvent('mouseover', $event)"
           @mouseout="emitEvent('mouseout', $event)"
