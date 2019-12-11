@@ -14,7 +14,7 @@
       :width="options.size"
       :height="options.size"
       v-if="allChildren.length"
-      @click="toggle"
+      @click.stop="toggle"
     >
       <rect
         :class="getClassPrefix() + '-border'"
