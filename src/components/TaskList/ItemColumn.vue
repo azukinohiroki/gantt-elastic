@@ -8,6 +8,9 @@
 -->
 <template>
   <div class="gantt-elastic__task-list-item-column" :style="itemColumnStyle"
+    @mouseover="emitEvent('mouseover', $event)"
+    @mouseout="emitEvent('mouseout', $event)"
+    @click.right.prevent="emitEvent('rclick', $event)"
     @click="emitEvent('click', $event)">
     <div class="gantt-elastic__task-list-item-value-wrapper" :style="wrapperStyle">
       <slot></slot>
@@ -17,8 +20,6 @@
           class="gantt-elastic__task-list-item-value"
           :style="valueStyle"
           @mouseenter="emitEvent('mouseenter', $event)"
-          @mouseover="emitEvent('mouseover', $event)"
-          @mouseout="emitEvent('mouseout', $event)"
           @mousemove="emitEvent('mousemove', $event)"
           @mousedown="emitEvent('mousedown', $event)"
           @mouseup="emitEvent('mouseup', $event)"
@@ -34,8 +35,6 @@
           class="gantt-elastic__task-list-item-value"
           :style="valueStyle"
           @mouseenter="emitEvent('mouseenter', $event)"
-          @mouseover="emitEvent('mouseover', $event)"
-          @mouseout="emitEvent('mouseout', $event)"
           @mousemove="emitEvent('mousemove', $event)"
           @mousedown="emitEvent('mousedown', $event)"
           @mouseup="emitEvent('mouseup', $event)"
