@@ -20,7 +20,7 @@
         ref="taskListItems"
         :style="{ ...root.style['task-list-items'], height: root.state.options.rowsHeight + 'px' }"
       >
-        <task-list-item v-for="task in root.visibleTasks" :key="task.id" :task="task"></task-list-item>
+        <task-list-item v-for="task in visibleTaskList" :key="task.task.id" :task="task.task" :style="task.style"></task-list-item>
       </div>
     </div>
   </div>
@@ -47,6 +47,23 @@ export default {
     this.root.state.refs.taskListWrapper = this.$refs.taskListWrapper;
     this.root.state.refs.taskList = this.$refs.taskList;
     this.root.state.refs.taskListItems = this.$refs.taskListItems;
+  },
+
+  computed: {
+    visibleTaskList() {
+      let ret = [];
+      var lastUser = this.root.visibleTasks[0].user;
+      for (let index = 0; index < this.root.visibleTasks.length; ++index) {
+        let task = this.root.visibleTasks[index];
+        let style = task.user == lastUser ? {} : {'border-top': '1px solid #F0F'};
+        lastUser = task.user;
+        ret.push({
+          task: task,
+          style: style,
+        });
+      }
+      return ret;
+    },
   }
 };
 </script>

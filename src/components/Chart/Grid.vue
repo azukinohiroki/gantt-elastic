@@ -20,7 +20,7 @@
     <g class="gantt-elastic__grid-lines" :style="{ ...root.style['grid-lines'] }">
       <line
         class="gantt-elastic__grid-line-horizontal"
-        :style="{ ...root.style['grid-line-horizontal'] }"
+        :style="line.style"
         v-for="line in horizontalLines"
         :key="line.key"
         :x1="line.x1"
@@ -119,7 +119,12 @@ export default {
       let lines = [];
       const state = this.root.state.options;
       let tasks = this.root.visibleTasks;
-      for (let index = 0, len = tasks.length; index <= len; index++) {
+      var lastMember = tasks[0].user;
+      var style = { ...this.root.style };
+      for (let index = 0, len = tasks.length; index < len; index++) {
+        style['grid-line-horizontal']['stroke'] = (lastMember !== tasks[index].user) ?
+          '#F0F' : '#00000010';
+        lastMember = tasks[index].user;
         const y =
           index * (state.row.height + state.chart.grid.horizontal.gap * 2) +
           this.root.style['grid-line-vertical']['stroke-width'] / 2;
@@ -128,9 +133,11 @@ export default {
           x1: 0,
           y1: y,
           x2: '100%',
-          y2: y
+          y2: y,
+          style: {...style['grid-line-horizontal']},
         });
       }
+      this.root.style['grid-line-horizontal']['stroke'] = '#00000010';
       return lines;
     },
 
